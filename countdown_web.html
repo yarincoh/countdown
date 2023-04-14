@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Countdown Timer</title>
+	<script type="text/javascript">
+		function startCountdown() {
+			// Get the date and time to count down to from the user input
+			var countDownDate = new Date(document.getElementById("countdown-date").value).getTime();
+
+			// Update the countdown every 1 second
+			var x = setInterval(function() {
+
+				// Get the current date and time
+				var now = new Date().getTime();
+
+				// Calculate the time remaining between the current date and time and the countdown date and time
+				var timeRemaining = countDownDate - now;
+
+				// Calculate days, hours, minutes, and seconds remaining
+				var days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+				var hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+				var minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+				var seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+
+				// Display the remaining time on the website
+				document.getElementById("countdown").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+
+				// If the countdown is finished, display "Countdown is over"
+				if (timeRemaining < 0) {
+					clearInterval(x);
+					document.getElementById("countdown").innerHTML = "Countdown is over";
+				}
+			}, 1000);
+		}
+	</script>
+</head>
+<body>
+	<h1>Countdown Timer</h1>
+	<p>Enter the date and time to count down for:</p>
+	<input type="datetime-local" id="countdown-date">
+	<button onclick="startCountdown()">Start Countdown</button>
+	<p id="countdown"></p>
+</body>
+</html>
